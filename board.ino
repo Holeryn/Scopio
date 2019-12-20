@@ -1,3 +1,25 @@
+/*
+  WiFi Web Server LED Blink
+
+ A simple web server that lets you blink an LED via the web.
+ This sketch will print the IP address of your WiFi Shield (once connected)
+ to the Serial monitor. From there, you can open that address in a web browser
+ to turn on and off the LED on pin 9.
+
+ If the IP address of your shield is yourAddress:
+ http://yourAddress/H turns the LED on
+ http://yourAddress/L turns it off
+
+ This example is written for a network using WPA encryption. For
+ WEP or WPA, change the WiFi.begin() call accordingly.
+
+ Circuit:
+ * WiFi shield attached
+ * LED attached to pin 9
+
+ created 25 Nov 2012
+ by Tom Igoe
+ */
 #include <SPI.h>
 #include <WiFi101.h>
 #include <MKRMotorCarrier.h>
@@ -6,7 +28,7 @@
 
 #define INTERRUPT_PIN 6
 
-#define MOTOR_ROATATION 45
+#define MOTOR_ROATATION 25
 
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = SECRET_SSID;        // your network SSID (name)
@@ -31,7 +53,7 @@ void setup() {
     controller.reboot();
     delay(500);
 
-  // check for the presence of the shield:
+  // check for the presence of the shield
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("WiFi shield not present");
     while (true);       // don't continue
@@ -42,7 +64,7 @@ void setup() {
     Serial.print("Attempting to connect to Network named: ");
     Serial.println(ssid);                   // print the network name (SSID);
 
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network rape time btw: 
     status = WiFi.begin(ssid, pass);
     // wait 10 seconds for connection:
     delay(10000);
@@ -57,8 +79,8 @@ void setup() {
 
 void loop() {
   WiFiClient client = server.available();   // listen for incoming clients
-  int dutyR;
-  int dutyL;
+  int dutyR=0;
+  int dutyL=0;
 
   if (client) {                             // if you get a client,
     Serial.println("new client");           // print a message out the serial port
