@@ -1,4 +1,4 @@
-A robot for my robotic class at school
+A robot for my school's robotics laboratory
 
  # Boards:
  * Arduino Mkr 1000
